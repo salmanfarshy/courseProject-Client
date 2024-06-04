@@ -67,7 +67,7 @@ function ViewItem() {
   };
   // console.log(like);
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen mb-8">
       {/* Loading  */}
       <HorizonLoading progress={progress} loading={navigation.state} />
       {/* Header */}

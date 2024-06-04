@@ -82,24 +82,26 @@ function Header({ categories }) {
               onMouseOver={() => setIsDropDown(true)}
             >
               Catagory
-              <div
-                className={`lg:w-40 lg:mt-6 md:w-32 md:mt-5 ${
-                  isDropDown ? "d-block" : "hidden"
-                } absolute lg:right-[25rem] md:right-[19rem] bg-[#CAF4FF] flex flex-col lg:gap-3 md:gap-1 font-medium lg:text-base md:text-sm select-none z-30`}
-                onMouseOver={() => setIsDropDown(true)}
-                onMouseLeave={() => setIsDropDown(false)}
-              >
-                {categories?.length &&
-                  categories.map((category) => (
-                    <Link
-                      key={category?._id}
-                      to={`/colletions/view/${category?.category}`}
-                      className="px-6 lg:py-2 md:py-2 hover:bg-gray-50 w-full hover:shadow-sm"
-                    >
-                      {category?.category}
-                    </Link>
-                  ))}
-              </div>
+              {categories?.length && (
+                <div
+                  className={`lg:w-40 lg:mt-6 md:w-32 md:mt-5 ${
+                    isDropDown ? "d-block" : "hidden"
+                  } absolute lg:right-[29rem] md:right-[20rem] bg-[#CAF4FF] flex flex-col lg:gap-3 md:gap-1 font-medium lg:text-base md:text-sm select-none z-30`}
+                  onMouseOver={() => setIsDropDown(true)}
+                  onMouseLeave={() => setIsDropDown(false)}
+                >
+                  {categories?.length &&
+                    categories.map((category) => (
+                      <Link
+                        key={category?._id}
+                        to={`/colletions/view/${category?.category}`}
+                        className="px-6 lg:py-2 md:py-2 hover:bg-gray-50 w-full hover:shadow-sm"
+                      >
+                        {category?.category}
+                      </Link>
+                    ))}
+                </div>
+              )}
             </div>
 
             <Link

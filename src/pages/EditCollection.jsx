@@ -62,8 +62,8 @@ function EditCollection() {
     setIsLoading(true);
 
     const formData = new FormData(e.target);
-    formData.append("userId", collection?._id);
-    formData.append("publicId", collection?.img?.filename);
+    formData.append("collId", collection?._id);
+    if (imageSrc) formData.append("publicId", collection?.img?.filename);
     const credentials = Object.fromEntries(formData);
 
     const res = await editCollection(credentials);
@@ -74,7 +74,7 @@ function EditCollection() {
   };
 
   return (
-    <div className="flex flex-col md:ms-56 sm:ms-56 ms-3 sm:pt-12 pt-8 gap-10 pb-12">
+    <div className="flex flex-col md:ms-56 sm:ms-56 ms-3 mb-52 sm:pt-12 pt-8 gap-10 pb-12">
       {/* Loading  */}
       <HorizonLoading progress={progress} loading={navigation.state} />
       {isLoading && <LoadingPage />}
@@ -182,14 +182,14 @@ function EditCollection() {
                 </svg>
                 Upload
               </label>
+              <button
+                type="submit"
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-40 sm:w-auto px-7 tracking-wide py-2.5 mt-3 ms-5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Edit
+              </button>
             </div>
           </div>
-          <button
-            type="submit"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-7 tracking-wide py-2.5 mt-32 ms-5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Edit
-          </button>
         </form>
       ) : (
         <p className="flex justify-center items-center w-96 h-56 lg:ms-80 md:ms-40 text-2xl font-medium">

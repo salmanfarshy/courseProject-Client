@@ -71,7 +71,7 @@ function CreateCollection() {
   };
 
   return (
-    <div className="flex flex-col md:ms-56 sm:ms-56 ms-3 sm:pt-12 pt-8 gap-10 pb-12">
+    <div className="flex flex-col md:ms-56 sm:ms-56 ms-3 mb-36 sm:pt-12 pt-8 gap-10 pb-12">
       {/* Loading  */}
       <HorizonLoading progress={progress} loading={navigation.state} />
       {isLoading && <LoadingPage />}
@@ -94,7 +94,7 @@ function CreateCollection() {
       </button>
       <form
         onSubmit={createCollection}
-        className="lg:w-[40rem] sm:w-[30rem] w-[25rem] lg:ps-20 ps-3"
+        className="lg:w-[40rem] sm:w-[30rem] w-[25rem] lg:ps-20 ps-3 lg:mb-20 md:mb-28 mb-32"
       >
         <div className="relative z-0 w-full mb-5 group">
           <input
@@ -144,7 +144,7 @@ function CreateCollection() {
             Description
           </label>
         </div>
-        <div className="grid md:grid-cols-2 md:gap-6">
+        <div className="flex flex-col md:gap-16">
           <div className="relative z-0 w-full h-20 mb-5 group">
             {imageSrc && (
               <img
@@ -176,14 +176,14 @@ function CreateCollection() {
               </svg>
               Upload
             </label>
+            <button
+              type="submit"
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-40 sm:w-auto px-5 py-2.5 mt-5 ms-5 sm:me-0 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Create
+            </button>
           </div>
         </div>
-        <button
-          type="submit"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 mt-10 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Create
-        </button>
       </form>
     </div>
   );

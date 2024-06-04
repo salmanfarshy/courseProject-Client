@@ -59,7 +59,7 @@ function Item() {
   // console.log(like);
 
   return (
-    <div className="mt-8 lg:me-3 me-8">
+    <div className="mt-8 lg:me-3 me-8 mb-8">
       <button className="flex items-center md:ms-64" onClick={goBack}>
         <IoIosArrowRoundBack size={50} />
         Back

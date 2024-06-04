@@ -63,7 +63,7 @@ function ProfileDrop({ userName }) {
               </Link>
             </li>
           </ul>
-          <div class="py-2">
+          <div className="py-2">
             <button
               onClick={Signout}
               className="block px-4 py-2 text-sm w-full text-start hover:bg-white text-indigo-500"
