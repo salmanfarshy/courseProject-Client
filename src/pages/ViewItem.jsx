@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { getItem, updateLike, getAllCollections } from "../apis/serverApis";
 import { useLoaderData, useNavigate, useNavigation } from "react-router-dom";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import CommentSection from "../components/CommentSection";
 import Header from "../components/root_page/Header";
 import HorizonLoading from "../components/HorizonLoading";
+import { JiraToggle } from "../context/JiraContext";
+import JiraPopup from "./JiraPopup";
 
 export async function loader({ params }) {
   const item = await getItem(params.id);
@@ -15,6 +17,7 @@ export async function loader({ params }) {
 
 function ViewItem() {
   const user = JSON.parse(localStorage.getItem("User"));
+  const { isJiraOpen, setIsJiraOpen } = useContext(JiraToggle);
 
   //   console.log(user);
   const { item, allCollections } = useLoaderData();
@@ -67,9 +70,11 @@ function ViewItem() {
   };
   // console.log(like);
   return (
-    <div className="min-h-screen mb-8">
+    <div className="min-h-screen">
       {/* Loading  */}
       <HorizonLoading progress={progress} loading={navigation.state} />
+      {/* JiraUI */}
+      {isJiraOpen && <JiraPopup />}
       {/* Header */}
       <Header categories={allCollections.data} />
       <button
@@ -80,7 +85,7 @@ function ViewItem() {
         Back
       </button>
       {/* item */}
-      <div className="rounded-lg overflow-hidden md:hover:shadow-md hover:shadow-sm bg-gray-800 mx-auto md:mb-5 mb-3 lg:w-[63rem] md:w-[48rem] sm:w-[38rem] w-[25rem] md:mt-5 mt-2">
+      <div className="rounded-lg overflow-hidden md:hover:shadow-md hover:shadow-sm bg-gray-800 mx-auto md:mb-10 mb-7 lg:w-[63rem] md:w-[48rem] sm:w-[38rem] w-[25rem] md:mt-5 mt-2">
         <div className="flex flex-col gap-3">
           <div className="px-6 py-4 flex flex-col gap-4">
             <div className="font-bold md:text-xl text-lg mb-2 text-white">
@@ -177,6 +182,20 @@ function ViewItem() {
             setComments={setComments}
             itemId={item?.data?._id}
           />
+        )}
+      </div>
+      <div className="flex md:flex-row flex-col md:gap-5 gap-2 justify-center items-center py-3 md:mt-2 mt-1 bg-gray-200">
+        <p className="md:text-base text-sm md:font-semibold font-medium">
+          &copy;Copyright Salman Farshi
+        </p>
+        {user && (
+          <button
+            onClick={() => setIsJiraOpen(true)}
+            type="button"
+            className="px-5 py-2 md:text-base text-sm font-medium text-center text-white bg-blue-700 rounded-md hover:bg-blue-700 focus:ring-1 focus:outline-none focus:ring-blue-700"
+          >
+            Create Support Ticket
+          </button>
         )}
       </div>
     </div>

@@ -13,7 +13,7 @@ function SideBar({
     <div
       className={`overflow-hidden ${
         !isToggle ? "-w-32" : "w-32"
-      } z-20 h-screen fixed shadow-xl bg-[#CAF4FF] md:hidden`}
+      } z-50 h-screen fixed shadow-xl bg-[#CAF4FF] md:hidden`}
     >
       <div
         className={`fixed md:hidden mt-3 ml-3 border-2 

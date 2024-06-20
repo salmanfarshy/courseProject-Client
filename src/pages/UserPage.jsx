@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import Dashboard from "./Dashboard";
-import { Outlet, useNavigate, useNavigation } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import isTokenExpired from "../assets/isTokenExpired";
+import { JiraToggle } from "../context/JiraContext";
+import JiraPopup from "./JiraPopup";
 
 function UserPage() {
   const navigate = useNavigate();
+  const { isJiraOpen } = useContext(JiraToggle);
 
   const user = JSON.parse(localStorage.getItem("User"));
   // console.log(user);
@@ -12,15 +15,15 @@ function UserPage() {
   const token = localStorage.getItem("token");
 
   if (isTokenExpired(token)) {
-    const user = localStorage.removeItem("User");
-    const token = localStorage.removeItem("token");
+    localStorage.removeItem("User");
+    localStorage.removeItem("token");
     navigate("/login");
   }
 
   return (
     <div className="flex relative">
-      {/* <Header /> */}
-
+      {/* JiraUI */}
+      {isJiraOpen && <JiraPopup />}
       <Dashboard />
       <Outlet />
     </div>

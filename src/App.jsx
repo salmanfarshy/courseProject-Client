@@ -18,6 +18,7 @@ import CollectionsPage, {
 import ItemsPage, { loader as ItmPageLoader } from "./pages/ItemsPage";
 import ViewItem, { loader as viewItmLoader } from "./pages/ViewItem";
 import Non_found from "./components/non_found";
+import TicketsPage from "./pages/TicketsPage";
 
 const user = JSON.parse(localStorage.getItem("User"));
 
@@ -71,7 +72,7 @@ const router = createBrowserRouter([
       {
         path: "dashboard",
         element: (
-          <div className="lg:ml-[17rem] ml-8 mt-16 flex flex-col gap-5 rounded-lg bg-gray-700 text-white p-8">
+          <div className="md:ml-[17rem] sm:ml-[15rem] ml-8 mt-16 flex flex-col gap-5 rounded-lg bg-gray-700 text-white p-8">
             <p className="lg:text-2xl text-xl font-medium">
               <em className="font-normal">Name:</em> {user?.name}
             </p>
@@ -125,6 +126,11 @@ const router = createBrowserRouter([
         element: <EditItem />,
         errorElement: <Non_found />,
         loader: itemEditLoader,
+      },
+      {
+        path: "tickets",
+        element: <TicketsPage />,
+        errorElement: <Non_found />,
       },
     ],
   },

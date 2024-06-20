@@ -126,3 +126,33 @@ export const newComment = async (credentials) => {
   // console.log(res);
   return res;
 };
+
+export const createJiraTic = async (
+  email,
+  name,
+  link,
+  priority,
+  status,
+  summary
+) => {
+  const res = await apiRequest.post("/create/jiraTicket", {
+    email,
+    name,
+    link,
+    priority,
+    status,
+    summary,
+  });
+  // console.log(res);
+  return res;
+};
+
+export const getTickets = async (number, email, admin) => {
+  const res = await apiRequest.post("/tickets", {
+    startAt: number,
+    email,
+    admin,
+  });
+  // console.log(res);
+  return res.data;
+};

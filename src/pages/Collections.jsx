@@ -61,7 +61,7 @@ function Collections() {
         showToast === "success" && (
           <SuccessToast
             setShowToast={setShowToast}
-            message="Update successfully."
+            message="Delete successfully."
           />
         )
       )}
@@ -145,7 +145,7 @@ function Collections() {
                     Edit
                   </Link>
                   <button
-                    className="w-20 py-1.5 bg-blue-700 rounded-md text-center text-white font-medium text-sm tracking-wider hover:scale-105 z-50"
+                    className="w-20 py-1.5 bg-blue-700 rounded-md text-center text-white font-medium text-sm tracking-wider hover:scale-105 z-30"
                     onClick={() => {
                       setDeletePopup(true);
                       setDeleteId(collection?._id);

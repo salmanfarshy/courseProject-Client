@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Header from "../components/root_page/Header";
 import Carousel from "../components/root_page/Carousel";
 import TopFivLarColl from "../components/root_page/TopFivLarColl";
@@ -7,6 +7,8 @@ import { useLoaderData, useNavigation } from "react-router-dom";
 import { getLatItms, getLarColl, getAllCollections } from "../apis/serverApis";
 import isTokenExpired from "../assets/isTokenExpired";
 import HorizonLoading from "../components/HorizonLoading";
+import JiraPopup from "./JiraPopup";
+import { JiraToggle } from "../context/JiraContext";
 
 export async function loader() {
   const items = await getLatItms();
@@ -17,6 +19,9 @@ export async function loader() {
 }
 
 function Root() {
+  const { isJiraOpen, setIsJiraOpen } = useContext(JiraToggle);
+  const user = JSON.parse(localStorage.getItem("User"));
+
   const { collections, items, allCollections } = useLoaderData();
   // console.log(collections.data, items.data, allCollections.data);
   const navigation = useNavigation();
@@ -24,8 +29,8 @@ function Root() {
   const [progress, setProgress] = useState(0);
 
   if (isTokenExpired(token)) {
-    const user = localStorage.removeItem("User");
-    const token = localStorage.removeItem("token");
+    localStorage.removeItem("User");
+    localStorage.removeItem("token");
   }
 
   useEffect(() => {
@@ -49,6 +54,8 @@ function Root() {
     <div className="min-h-screen">
       {/* Loading  */}
       <HorizonLoading progress={progress} loading={navigation.state} />
+      {/* JiraUI */}
+      {isJiraOpen && <JiraPopup />}
       {/* Header */}
       <Header categories={allCollections.data} />
       {/* Carousel */}
@@ -63,10 +70,19 @@ function Root() {
         Most Five Latest Items.
       </p>
       <TopFivLatItm items={items.data} />
-      <div className="flex justify-center items-center md:py-2 py-1 md:mt-2 mt-1 bg-gray-200">
+      <div className="flex md:flex-row flex-col md:gap-5 gap-2 justify-center items-center py-3 md:mt-2 mt-1 bg-gray-200">
         <p className="md:text-base text-sm md:font-semibold font-medium">
           &copy;Copyright Salman Farshi
         </p>
+        {user && (
+          <button
+            onClick={() => setIsJiraOpen(true)}
+            type="button"
+            className="px-5 py-2 md:text-base text-sm font-medium text-center text-white bg-blue-700 rounded-md hover:bg-blue-700 focus:ring-1 focus:outline-none focus:ring-blue-700"
+          >
+            Create Support Ticket
+          </button>
+        )}
       </div>
     </div>
   );

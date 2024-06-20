@@ -6,6 +6,16 @@ import { Link } from "react-router-dom";
 import ProfileDrop from "../ProfileDrop";
 
 function Header({ categories }) {
+  const uniqueCategories = [];
+  const uniqueCategoryObjects = categories?.filter((item) => {
+    if (!uniqueCategories?.includes(item?.category)) {
+      uniqueCategories?.push(item?.category);
+      return true;
+    }
+    return false;
+  });
+
+  // console.log(categories);
   const value = localStorage.getItem("User");
   const User = JSON.parse(value);
   // console.log(User);
@@ -15,7 +25,7 @@ function Header({ categories }) {
   return (
     <>
       <SideBar
-        categories={categories}
+        categories={uniqueCategoryObjects}
         isToggle={isToggle}
         isDropDown={isDropDown}
         setIsToggle={setIsToggle}
@@ -82,7 +92,7 @@ function Header({ categories }) {
               onMouseOver={() => setIsDropDown(true)}
             >
               Catagory
-              {categories?.length && (
+              {uniqueCategoryObjects?.length && (
                 <div
                   className={`lg:w-40 lg:mt-6 md:w-32 md:mt-5 ${
                     isDropDown ? "d-block" : "hidden"
@@ -90,8 +100,8 @@ function Header({ categories }) {
                   onMouseOver={() => setIsDropDown(true)}
                   onMouseLeave={() => setIsDropDown(false)}
                 >
-                  {categories?.length &&
-                    categories.map((category) => (
+                  {uniqueCategoryObjects?.length &&
+                    uniqueCategoryObjects.map((category) => (
                       <Link
                         key={category?._id}
                         to={`/colletions/view/${category?.category}`}

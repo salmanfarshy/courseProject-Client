@@ -149,7 +149,10 @@ function Items() {
                 </div>
                 <div className="ms-5 mb-3 text-sm font-semibold text-gray-700 flex flex-wrap gap-1">
                   {item?.tags.map((tag) => (
-                    <div className="inline-block bg-gray-200 rounded-full px-2 py-0.5 mr-3 mb-2">
+                    <div
+                      key={tag}
+                      className="inline-block bg-gray-200 rounded-full px-2 py-0.5 mr-3 mb-2"
+                    >
                       #{tag}
                     </div>
                   ))}
@@ -158,7 +161,7 @@ function Items() {
               <div className="flex gap-5 md:ml-24 ml-28 mb-4 mt-6">
                 <Link
                   to={`/user/items/edit/${item?._id}`}
-                  class="text-white text-center  bg-blue-700 hover:bg-blue-800 focus:ring-1 focus:ring-blue-300 font-medium rounded-lg text-xs px-6 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                  className="text-white text-center  bg-blue-700 hover:bg-blue-800 focus:ring-1 focus:ring-blue-300 font-medium rounded-lg text-xs px-6 py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                 >
                   Edit
                 </Link>
